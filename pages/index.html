@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Main Screen</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <div id="menuBox">
+        <h1>Menu</h1>
+        <div class="gridRowGapsBox">
+            <button id="saveBtn" class="menuBtn">Save</button>
+            <label for="loadInput">Load:</label>
+            <input type="file" id="loadInput">
+        </div>
+        <button id="closeMenuBtn">Close</button>
+    </div>
+    <div id="menuBlocker"></div>
+    <div id="eventBox">
+        <div id="eventTextBox">Howdy</div>
+        <div id="eventChoiceBox"></div>
+        <div id="eventButtonBox">
+            <button id="eventButtonExit"> Close </button>
+        </div>
+    </div>
+    <div id="primaryBox">
+        <div id="statBox">
+            <button id="menuBtn">|||</button>
+            <p id="incomeStat" class="textGen">Cash: 0</p>
+            <p id="capacityStat" class="textGen">Capacity: 0/1</p>
+            <p id="dayStat" class="textGen">Day: 1</p>
+                <div id="buttonBox">
+                <div id="buttonBoxInner">
+                    <button class="btn" id="homeBtn">
+                        <img class="imgLogo" src="../images/homeLogo.png">
+                    </button>
+                    <button class="btn" id="sectorBtn">Sectors</button>
+                    <button class="btn" id="patientBtn">Current Customers</button>
+                    <button class="btn" id="employeeBtn">Employees</button>
+                    <button class="btn" id="upgradeBtn">Research Upgrades</button>
+                </div>
+            </div>
+            <div id="tickBox">
+                <div id="turnTicker">
+                    <div id="turnTickerProgress"></div>
+                </div>
+                <button class="tickBtn" id="pauseBtn">||</button>
+        <button class="tickBtn" id="slowSpdBtn">></button>
+        <button class="tickBtn" id="normalSpdBtn">>></button>
+                <button class="tickBtn" id="dblSpdBtn">>>></button>
+            </div>
+        </div>
+        <div id="mainViewBox">
+            <div id="eventBubbleBox">
+            </div>
+            <div>
+                <div class="viewBox" id="buildingBox">
+                    <div class="sidePanelBuildingBox">
+                        <img class="background" src="../images/sidePanelConditioning.png">
+                    </div>
+                    <div class="buildingSceneContainer" id="statBoxConditioning">
+                        <div class="borderBox"></div>
+                        <div></div>
+                        <div class="borderBox"></div>
+                    </div>
+                    <div class="sidePanelBuildingBox">
+                        <img class="background" src="../images/sidePanelConditioning.png">
+                    </div>
+                </div>
+                <div class="viewBox" id="homeBox">
+                    <div id=leftHomeBox>
+                        <div class="verticalRowContainer" id="patientSidePanel">
+                            <div id="patientSidePanelInnerContainer">
+                                <div id="patientSidePanelInnerTitle">Current Dolls</div>
+                                <div id="patientSidePanelInner"></div>
+                            </div>
+                            <img class="background" src="../images/basicBackgroundVertical.png">
+                        </div>
+                        <div class="verticalRowContainer">
+                            <img class="background" src="../images/basicBackgroundVertical.png">
+                        </div>
+                    </div>
+                    <div id="centralHomeBox">
+                        <div id="buildBox">
+                            <img id="buildBoxBackground" class="background" src="../images/basicBackground2.png"></img>
+                            <div id="buildBoxInner">
+                                <div id="buildBoxInnerTop">
+                                    <div></div>
+                                    <div id="buildBoxInnerTopTitle" style="text-align: center">Build Menu</div>
+                                    <img id="buildBoxInnerTopCloseBtnImg" src="../images/iconX.png"></img>
+                                </div>
+                                <div id="buildingBoxInnerMain">
+                                    <div id="buildTypeContainer" class="singleDivGridContainer">
+                                        <img class="background" src="../images/basicBackground3_2.png"></img>
+                                        <div id="buildTypeSelectOuter">
+                                            <div id="buildTypeSelectInner">
+                                                <div class="iconDiv" id="buildTypeConditioning">
+                                                    <img src="../images/spiralLogo.png"></img>
+                                                    <div style="font-size: 1em">Conditioning</div>
+                                                </div>
+                                                <div class="iconDiv" id="buildTypeCapacity">
+                                                    <img src="../images/bedIcon.png"></img>
+                                                    <div style="font-size: 1em">Capacity</div>
+                                                </div>
+                                                <div class="iconDiv" id="buildTypeTraining">
+                                                    <img src="../images/spiralLogo.png"></img>
+                                                    <div style="font-size: 1em">Training</div>
+                                                </div>
+                                                <div class="iconDiv" id="buildTypeHypno">
+                                                    <img src="../images/spiralLogo.png"></img>
+                                                    <div style="font-size: 1em">Research</div>
+                                                </div>
+                                                <div class="iconDiv" id="buildTypeHypno">
+                                                    <img src="../images/spiralLogo.png"></img>
+                                                    <div style="font-size: 1em">Intake</div>
+                                                </div>
+                                                <div class="iconDiv" id="buildTypeModification">
+                                                    <img src="../images/spiralLogo.png"></img>
+                                                    <div style="font-size: 1em">Modification</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="buildingBuildSelectContainer" class="dualDivGridContainer">
+                                        <div id="buildingBuildSelectLeft" class="borderBox">
+                                            <div id="buildingBuildSelect"></div>
+                                            <img class="background" src="../images/basicBackground.png"></img>
+                                        </div>
+                                        <div id="buildingBuildSelectRight" class="borderBox">
+                                            <div id="buildingBuildDesc"></div>
+                                            <div id="buildingBuildBtn">
+                                                <img src="../images/btnBuild.png"></img>
+                                            </div>
+                                            <img class="background" src="../images/basicBackground.png"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="baseBox"></div>
+                    </div>
+                    <div id="rightHomeBox">
+                        <div class="verticalRowContainer" id="progressBox">
+                            <div id="progressBoxInner">
+                            <!-- Start of the Research Progress Box -->
+                                <div class="progressBoxTitle" id="progressBoxTitleResearch">Research</div>
+                                <div class="progressBoxCategory" id="progressBoxCategoryResearch">
+                                    <div class="innerSlot" id="progressBoxInnerSlotResearch">
+                                        <div id="progressBoxInnerSlotResearchName">Current Research:</div>
+                                    </div>
+                                </div>
+                            <!-- Start of the Expedition Progress Box -->
+                                <div class="progressBoxTitle" id="progressBoxTitleExpedition">Expeditions</div>
+                                <div class="progressBoxCategory" id="progressBoxCategoryExpedition">
+                                    <div class="innerSlot" id="progressBoxInnerSlotExpedition">
+                                        <div id="progressBoxInnerSlotExpeditionName">Current Expedition:</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img class="background" src="../images/basicBackgroundVertical.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="viewBox" id="patientBox">
+                    <div id="customerDivContainer"></div>
+                    <div class="sidePanelAnchor" id="sidePanelAnchorPatientBox">
+                        <div class="sidePanel" id="sidePanelPatientBox"></div>
+                    </div>
+                </div>
+                <div class="viewBox" id="patientDetailDiv">
+                    <div id="patientTraining">
+                        <div id="patientBars">
+                            <h3 class="textGen">Current Resistance</h3>
+                            <div id="resistanceBar">
+                                <div id="resistanceProgress"></div>
+                            </div>
+                            <div>
+                                <h3 class="textGen"> Gender Presentation
+                            </div>
+                            <div class="gridDualAutoLeft">
+                                <div id="genderSpectrum">
+                                    <div id="genderSpectrumPosition"></div>
+                                </div>
+                                <p class="textGen" id="genderSpectrumNumCust"></p>
+                            </div>
+                        </div>
+                        <div id="kinkDisplay">
+                            <h3 class="textGen"> Current Kinks </h3>
+                            <div id="kinkList"></div>
+                        </div>
+                        <div>
+                            <h3 class="textGen">"Recruit" Patient?</h3>
+                            <div id="patientOptions"></div>
+                        </div>
+                        <div>
+                            <h3 class="textGen"> Patient Requests</h3>
+                            <div id="patientRequests"></div>
+                        </div>
+                    </div>
+                    <div id="patientDesc">
+                        <h3 class="textGen" id="patientName"></h3>
+                        <p class="textGen" id="patientDescP"></p>
+                    </div>
+                </div>
+                <div class="viewBox" id="employeeBox"></div>
+                <div class="viewBox" id="employeeDetailDiv">
+                <div id="employeeTraining">
+                        <h3 class="textGen">Current Resistance</h3>
+                        <div id="resistanceBar">
+                            <div id="resistanceProgressEmployee"></div>
+                        </div>
+                            <div>
+                                <h3 class="textGen"> Gender Presentation
+                            </div>
+                                <div class="gridDualAutoLeft">
+                                    <div id="genderSpectrum">
+                                        <div id="genderSpectrumPositionEmployee"></div>
+                                    </div>
+                                    <p class="textGen" id="genderSpectrumNum"></p>
+                                </div>
+                        <div class="gridDualAuto" id="employeeSkillIntDiv">
+                            <div>
+                                <h3 class="textGen">Skills:</h3>
+                                <div id="employeeSkillDiv"></div>
+                            </div>
+                            <div>
+                                <h3 class="textGen">Training Activites:</h3>
+                                <div id="employeeTrainingActivities"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="employeeDesc">
+                    <table id="employeeStatTable">
+                        <tr>
+                            <th class="textGen">Public Name</th>
+                            <th class="textGen">Internal Name</th>
+                            <th class="textGen">Current Status</th>
+                        </tr>
+                        <tr>
+                            <td class="textGen" id="employeeName"></td>
+                            <td class="textGen" id="employeeInternalName"></td>
+                            <td class="textGen" id="employeeStatus"></td>
+                        </tr>
+                        <tr>
+                            <th class="textGen">Favorite Car</th>
+                            <th class="textGen">Bender</th>
+                            <th class="textGen">Weight</th>
+                        </tr>
+                        <tr>
+                            <td class="textGen">Howdy</td>
+                            <td class="textGen">Howdy</td>
+                            <td class="textGen">Howdy</td>
+                        </tr>
+                    </table>
+                    <p>Description:</p>
+                    <p class="textGen" id="employeeDescP"></p>
+                    </div>
+                </div>
+                <div class="viewBox" id="upgradeBox"></div>
+                <div class="viewBox" id="sectorBox">
+                    <div id="sectorSelect"></div>
+                    <div id="sectorDetail">
+                        <div id="sectorDetailTransitionDiv">
+                            <img id="sectorDetailTransitionImg" src="../images/transitionImg.png"></img>
+                        </div>
+                        <div id="sectorDetailExpeditionLaunchedDiv">
+                            <div class="horizontalRows">
+                                <div id="sectorDetailProgressDiv" class="innerPanelDiv">
+                                    <img class="background" src="../images/basicBackground3_1.png">
+                                    <div id="sectorDetailProgressTitle">
+                                            <img id="sectorDetailProgressTitleImg" src="../images/sectorDetailProgressTitleImg3.png"></img>
+                                    </div>
+                                    <div id="sectorDetailProgressBarDiv">
+                                        <div id="sectorDetailProgressBarOuter">
+                                            <div id="sectorDetailProgressBarInner"></div>
+                                            <img id="sectorDetailProgressBarInnerImg" src="../images/progressBarEmptyVisible_2.png"></img>
+                                            <div id="sectorDetailProgressBarInnerImgShipDiv">
+                                                <img id="sectorDetailProgressBarInnerImgShip" src="../images/shipImg.png"></img>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="sectorDetailCapturedDiv" class="innerPanelDiv">
+                                    <div id="sectorDetailCapturedDivInner"></div>
+                                    <img class="background" src="../images/basicBackground3_2.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sectorDetailDiv">
+                            <div id="sectorDetailDescDiv">
+                            <div id="sectorDetailDescText"></div>
+                                <img class="background" src="../images/basicBackground3.png"></img>
+                            </div>
+                            <div id= "sectorDetailStatDiv">
+                                <div id="sectorDetailStatInnerDiv">
+                                    <div id="sectorDetailStatTextDiv">
+                                        <div class="sectorDetailImgDiv" id="sectorDetailStatWealth">
+                                            <img class="sectorDetailImg" id="sectorDetailWealthImg" src="../images/wealthTitle.png"></img>
+                                            <img class="sectorDetailImgStatus" id="sectorDetailWealthImgStatus" src="../images/btnStatusHigh.png"></img>
+                                        </div>
+                                        <div class="sectorDetailImgDiv" id="sectorDetailStatDuration">
+                                            <img class="sectorDetailImg" src="../images/travelTitle.png"></img>
+                                            <div class="sectorDetailTextStatus">
+                                        <div id="sectorDetailTravelTextStatus"></div>
+                                            <img class = "sectorDetailImg" src="../images/basicBackground.png"></img>
+                                        </div>
+                                        </div>
+                                        <div class="sectorDetailImgDiv" id="sectorDetailStatRewards">
+                                            <img class="sectorDetailImg" src="../images/rewardsTitle.png"></img>
+                                            <img class="sectorDetailImgStatus" id="sectorDetailRewardImgStatus" src="../images/btnStatusHigh.png"></img>
+                                        </div>
+                                        <div class="sectorDetailImgDiv" id="sectorDetailStatRisks">
+                                            <img class="sectorDetailImg" id="sectorDetailRiskImg" src="../images/riskTitle.png"></img>
+                                            <img class="sectorDetailImgStatus" id="sectorDetailRiskImgStatus" src="../images/btnStatusMedium.png"></img>
+
+                                        </div>
+                                    </div>
+                                    <img class="background" src="../images/basicBackground.png"></img>
+
+                                </div>
+                                <div id="sectorDetailStartBtnOuterDiv">
+                                <div id="sectorDetailStartBtn">
+                                    <img id="sectorDetailGrey" src="../images/btnStartGrey.png"></img>
+                                    <img id="sectorDetailStart" src="../images/btnStart.png"></img>
+                                    <img id="sectorDetailClicked" src="../images/btnStartClicked.png"></img>
+                                </div>
+                                    <img class="background" src="../images/basicBackground2.png"></img>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script src="../scripts/script.js"></script>
+</body>
+</html>
+
+
+
