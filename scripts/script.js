@@ -1,6 +1,7 @@
 "use strict"
 
 $(function () {
+    console.log("I was uploaded by git")
     //Determines the screen with and height		
     var w = window.innerWidth;
     var h = window.innerHeight;
