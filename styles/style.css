@@ -658,6 +658,12 @@ align-self: center;
     border-radius: 10px;
 }
 
+.borderBoxGrid {
+    border: solid;
+    border-radius: 10px;
+    display:grid;
+}
+
 .dualDivGridContainer {
     display: grid;
     grid-template-columns: 49% 49%;
@@ -690,22 +696,46 @@ align-self: center;
 
 #buildingBox {
 display: grid;
-grid-template-columns: 0.15fr 0.70fr 0.15fr;
 width: 100%;
 height: 100%;
+background: mediumpurple;
+grid-template-columns: 15% 70% 15%
 }
 
 .buildingSceneContainer {
 display: grid;
-background: white;
+}
+
+.gridBox {
+    display:grid;
+}
+
+#statBoxConditioningSelectionDiv {
+display: grid;
+width: 95%;
+height: 95%;
+justify-self: center;
+align-self: center;
+gap: 2%;
+}
+
+#statBoxConditioningDetailDiv {
+display:grid;
+width: 95%;
+height: 95%;
+justify-self: center;
+align-self: center;
+gap: 2%;
 }
 
 #statBoxConditioning {
-    grid-template-columns:45% 5% 45%;
-    width:95%;
-    height:90%;
+    grid-template-columns: 50% 50%;
+    width:98%;
+    height:95%;
     justify-self:center;
     align-self:center;
+    position:relative;
+    gap: 1%;
 }
 
 .sidePanelBuildingBox {
