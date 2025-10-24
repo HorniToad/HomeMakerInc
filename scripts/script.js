@@ -2344,9 +2344,9 @@ $(function () {
         $("#buildingBox").show();
 
         if(selectedBuilding.type = "conditioning") {
-            $("#statBoxConditioning").css({"display": "grid"})
 
-            function conditioningBuildingUpdate(){
+            (function conditioningBuildingUpdate(){
+                $("#statBoxConditioning").css({"display": "grid"})
                 $("#statBoxConditioningDesc").text(selectedBuilding.desc)
                 if(selectedBuilding.occupant) {
                     $("#statBoxConditioningNameDiv").text(selectedBuilding.occupant.customerName)
@@ -2369,6 +2369,8 @@ $(function () {
                         row = document.createElement("div");
                         row.setAttribute("class", "btnContainerGridRow");
                         rowCount = 0;
+
+                        target.append(row)
                     }
                     let selectedEmployee = employees[i];
 
@@ -2386,9 +2388,8 @@ $(function () {
                     btnBox.append(btnText);
                     btnBox.append(btnImg)
                 }
-            }
+            })();
 
-            conditioningBuildingUpdate();
 
 
         }
