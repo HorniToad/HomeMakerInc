@@ -2340,9 +2340,56 @@ $(function () {
     function buildingFilter(x) {
         let selectedBuilding = x;
         $(".viewBox").hide();
+        $(".buildingSceneContainer").hide();
         $("#buildingBox").show();
 
         if(selectedBuilding.type = "conditioning") {
+            $("#statBoxConditioning").css({"display": "grid"})
+
+            function conditioningBuildingUpdate(){
+                $("#statBoxConditioningDesc").text(selectedBuilding.desc)
+                if(selectedBuilding.occupant) {
+                    $("#statBoxConditioningNameDiv").text(selectedBuilding.occupant.customerName)
+                }
+                else {
+                    $("#statBoxConditioningNameDiv").text("Unoccupied")
+                }
+                let target = document.getElementById("statBoxConditioningEmployeeSelect")
+                $("#" + target.id).empty();
+
+                let row = document.createElement("div");
+                row.setAttribute("class", "btnContainerGridRow")
+
+                target.append(row)
+
+                let rowCount = 0;
+
+                for(let i = 0; i < employees.length; i++) {
+                    if(rowCount === 3) {
+                        row = document.createElement("div");
+                        row.setAttribute("class", "btnContainerGridRow");
+                        rowCount = 0;
+                    }
+                    let selectedEmployee = employees[i];
+
+                    let btnBox = document.createElement("div");
+                    btnBox.setAttribute("class", "imgBtn");
+
+                    let btnText = document.createElement("div");
+                    let btnImg = document.createElement("img")
+
+                    btnImg.src="../images/btnTitle.png"
+
+                    btnText.innerText = selectedEmployee.customerName
+
+                    row.append(btnBox);
+                    btnBox.append(btnText);
+                    btnBox.append(btnImg)
+                }
+            }
+
+            conditioningBuildingUpdate();
+
 
         }
     }

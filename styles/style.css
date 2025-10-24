@@ -703,7 +703,7 @@ grid-template-columns: 15% 70% 15%
 }
 
 .buildingSceneContainer {
-display: grid;
+display: none;
 }
 
 .gridBox {
@@ -712,6 +712,7 @@ display: grid;
 
 #statBoxConditioningSelectionDiv {
 display: grid;
+grid-template-rows: 49% 49%;
 width: 95%;
 height: 95%;
 justify-self: center;
@@ -721,11 +722,30 @@ gap: 2%;
 
 #statBoxConditioningDetailDiv {
 display:grid;
+grid-template-rows: 49% 49%;
 width: 95%;
 height: 95%;
 justify-self: center;
 align-self: center;
 gap: 2%;
+}
+
+#statBoxConditioningDescBox {
+grid-template-rows: 75% 25%;
+}
+
+#statBoxConditioningDesc {
+width: 90%;
+justify-self: center;
+align-self: center;
+height: 95%;
+}
+
+#statBoxConditioningStatus {
+width: 90%;
+justify-self: center;
+align-self: center;
+height: 95%;
 }
 
 #statBoxConditioning {
@@ -736,6 +756,24 @@ gap: 2%;
     align-self:center;
     position:relative;
     gap: 1%;
+}
+
+#statBoxConditioningEmployeeSelect {
+display: block;
+width: 95%;
+height: 95%;
+align-self: center;
+justify-self: center;
+border: solid;
+border-radius: 10px;
+position: relative;
+overflow: scroll;
+}
+
+.btnContainerGridRow {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    height:10%;
 }
 
 .sidePanelBuildingBox {
