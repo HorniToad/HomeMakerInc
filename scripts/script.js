@@ -2344,7 +2344,6 @@ $(function () {
         $("#buildingBox").show();
 
         if(selectedBuilding.type = "conditioning") {
-
             (function conditioningBuildingUpdate(){
                 $("#statBoxConditioning").css({"display": "grid"})
                 $("#statBoxConditioningDesc").text(selectedBuilding.desc)
@@ -2389,9 +2388,6 @@ $(function () {
                     btnBox.append(btnImg)
                 }
             })();
-
-
-
         }
     }
 

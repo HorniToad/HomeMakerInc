@@ -773,7 +773,7 @@ overflow: scroll;
 .btnContainerGridRow {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    height:10%;
+    height:20%;
 }
 
 .sidePanelBuildingBox {
