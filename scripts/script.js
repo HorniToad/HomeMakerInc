@@ -654,7 +654,7 @@ $(function () {
     }
 
 
-    let gameState = {tickState: false, tickRate: false, completeTick: 10, currentTick: 0, date: false, currentDay: 1, cash: 500, patientCap: false, custFocus: false, employeeFocus: false, conditionFocus: false, charGen: false, buildFocus: false, buildTypeFocus: false, buildItemFocus: false}
+    let gameState = {tickState: false, tickRate: false, completeTick: 10, currentTick: 0, date: false, currentDay: 1, cash: 500, patientCap: false, custFocus: false, employeeFocus: false, conditionFocus: false, charGen: false, buildFocus: false, buildTypeFocus: false, buildItemFocus: false, buildingSceneFocus: false}
 
     function startUp() {
         researchSetup()
@@ -677,6 +677,11 @@ $(function () {
             progressBoxSetup();
             if(gameState.custFocus) {
                 custDetailSetup(gameState.custFocus);
+            }
+
+            if(gameState.buildingSceneFocus) {
+                console.log("I am under here")
+                buildingUpdateHandler();
             }
             if(expeditionArray.sector) {
                 sectorExpeditionRun(expeditionArray.sector)
@@ -1321,9 +1326,20 @@ $(function () {
             }
         }
 
+        let statObject = {name: false, id: false, current: false, max: false, min: false, nameC: false}
+
         let resistance = Math.floor(Math.random() * 100)
+        let resistanceStat = Object.create(statObject)
+            resistanceStat.current = resistance;
+            resistanceStat.name = "resistance";
+            resistanceStat.nameC = "Resistance";
+            resistanceStat.id = "statResistance";
+            resistanceStat.max = 100;
+            resistanceStat.min = 0;
         if (resistance < 40) {
             resistance += 30;
+            resistanceStat.current = resistance;
+
         }
 
         let intelligence = Math.floor(Math.random() * 80)
@@ -1338,7 +1354,7 @@ $(function () {
         willpower = willpower / 10;
         console.log(willpower)
 
-        let id = gender + height + skin + resistance + "ID"
+        let id = gender + height + skin + resistanceStat.current + "ID"
 
         let bodyPreference = thiccScale[Math.floor(Math.random() * thiccScale.length)].id
 
@@ -1350,7 +1366,7 @@ $(function () {
 
         let body = {head: head, ass: ass, thigh: thigh, genitalia: genitalia, chest: chest, hips: hips}
 
-        const completeCustomer = { customerName: name, customerNamePlural: name + "'s", customerInternalName: internalName, customerGender: gender, customerGenderSpec: genderSpec, presentation: presentation, pronouns: pronouns, kinks: false, customerBodyType: custBodyType, customerHeight: height, customerBody: body, customerHair: hair, customerHairColor: hairColor, customerSkin: skin, custId: id, employee: false, request: false, assignedDoll: false, assignedCust: false, activeDoll: false, patience: 10, tick: 0, requestFulfillment: false, fulfilled: false, totalToPay: false, spawn: true, thiccScale: false, bodyPreference: bodyPreference, analVirgin: true, oralVirgin: true, occupation: false, resistance: resistance, devotion: 0, intelligence: intelligence, willpower: willpower, arousal: false, def: 1.5};
+        const completeCustomer = { customerName: name, customerNamePlural: name + "'s", customerInternalName: internalName, customerGender: gender, customerGenderSpec: genderSpec, presentation: presentation, pronouns: pronouns, kinks: false, customerBodyType: custBodyType, customerHeight: height, customerBody: body, customerHair: hair, customerHairColor: hairColor, customerSkin: skin, custId: id, employee: false, request: false, assignedDoll: false, assignedCust: false, activeDoll: false, patience: 10, tick: 0, requestFulfillment: false, fulfilled: false, totalToPay: false, spawn: true, thiccScale: false, bodyPreference: bodyPreference, analVirgin: true, oralVirgin: true, occupation: false, resistance: resistanceStat, devotion: 0, intelligence: intelligence, willpower: willpower, arousal: false, def: 1.5};
 
         kinkSetup(completeCustomer);
         completeCustomer.thiccScale = thiccScaleFunc(completeCustomer)
@@ -1752,7 +1768,7 @@ $(function () {
 
         const resistanceBar = document.getElementById("resistanceProgress");
 
-        let turnTickerProgress = selected.resistance;
+        let turnTickerProgress = selected.resistance.current;
         resistanceBar.style.width = turnTickerProgress + '%';
 
         let genderSpecPos = document.getElementById("genderSpectrumPosition")
@@ -1908,15 +1924,15 @@ $(function () {
     function statusCheck(x) {
         let char = x;
         let status;
-        if(char.resistance > 0) {
+        if(char.resistance.current > 0) {
             for(let i = 0; i < statusArrayResistance.length; i++) {
-                if(char.resistance > statusArrayResistance[i].bottom) {
+                if(char.resistance.current > statusArrayResistance[i].bottom) {
                     status = statusArrayResistance[i]
                     break;
                 }
             }
         }
-        else if(char.resistance === 0) {
+        else if(char.resistance.current === 0) {
             status = {id: "broken", name: "Broken", bottom: 0}
         }
         else if(char.devotion > 0) {
@@ -1970,7 +1986,7 @@ $(function () {
         }
         const resistanceBar = document.getElementById("resistanceProgressEmployee");
 
-        let turnTickerProgress = selected.resistance;
+        let turnTickerProgress = selected.resistance.current;
         resistanceBar.style.width = turnTickerProgress + '%';
 
         let genderSpecPos = document.getElementById("genderSpectrumPositionEmployee")
@@ -2092,7 +2108,7 @@ $(function () {
 
         { id: "speechTraining", name: "Speech Training", type: "training", cost: 350, build: 5, unlocked: true, base: true, stats: "resistance/-5", capacity: 0, trainable: true, desc: "A basic hypnosis screen that helps to relax those who stare into it" },
 
-        { id: "resistanceRemoval1", name: "Relaxation Center", type: "conditioning", cost: 350, build: 5, unlocked: true, base: true, stats: "resistance/-5", capacity: 0, trainable: true, desc: "A small room used for helping less enthusiastic wifes relax and accept their new role. With the aid of speakers sending a constant stream of subliminal messages to whoever occupies it." },
+        { id: "resistanceRemoval1", name: "Relaxation Center", type: "conditioning", cost: 350, build: 5, unlocked: true, base: true, stat: "resistance", statInt: -1, capacity: 0, trainable: true, desc: "A small room used for helping less enthusiastic wifes relax and accept their new role. With the aid of speakers sending a constant stream of subliminal messages to whoever occupies it." },
 
         { id: "hypnoUpg2", name: "Hypno Headphones", type: "conditioning", cost: 1000, build: 10, unlocked: false, base: false, stats: "resistance/-10", capacity: 0, trainable: true, desc: "A set of headphones that is strapped to the patients b head to ensure constant subliminal messages."},
 
@@ -2247,7 +2263,7 @@ $(function () {
             selectedSlot.desc = selectedBuild.desc
             selectedSlot.name = selectedBuild.name;
             selectedSlot.type = selectedBuild.type;
-            selectedSlot.state = selectedBuild.stat;
+            selectedSlot.stat = selectedBuild.statInt;
 
 
             $("#" + selectedSlot.id).text(selectedSlot.name)
@@ -2339,6 +2355,7 @@ $(function () {
 
     function buildingFilter(x) {
         let selectedBuilding = x;
+        gameState.buildingSceneFocus = selectedBuilding
         $(".viewBox").hide();
         $(".buildingSceneContainer").hide();
         $("#buildingBox").show();
@@ -2349,6 +2366,10 @@ $(function () {
                 $("#statBoxConditioningDesc").text(selectedBuilding.desc)
                 if(selectedBuilding.occupant) {
                     $("#statBoxConditioningNameDiv").text(selectedBuilding.occupant.customerName)
+                    console.log(selectedBuilding)
+                    let currentProgress = progressCheck(selectedBuilding.occupant.resistance.current, selectedBuilding.occupant.resistance.max)
+                    let progressBar = document.getElementById("statBoxConditioningDetailDiv").getElementsByClassName("progressBarProgress")
+                    progressBar[0].style.width = currentProgress + "%";
                 }
                 else {
                     $("#statBoxConditioningNameDiv").text("Unoccupied")
@@ -2393,6 +2414,21 @@ $(function () {
                     btnBox.append(btnImg)
                 }
             })();
+        }
+    }
+
+    function buildingUpdateHandler() {
+        if(gameState.buildingSceneFocus) {
+
+            if(gameState.buildingSceneFocus.type == "conditioning") {
+                console.log("mewody lowdy!")
+                 gameState.buildingSceneFocus.occupant.resistance.current = gameState.buildingSceneFocus.occupant.resistance.current + gameState.buildingSceneFocus.stat
+                 console.log(gameState)
+
+                 let currentProgress = progressCheck(gameState.buildingSceneFocus.occupant.resistance.current, gameState.buildingSceneFocus.occupant.resistance.max)
+                 let progressBar = document.getElementById("statBoxConditioningDetailDiv").getElementsByClassName("progressBarProgress")
+                 progressBar[0].style.width = currentProgress + "%";
+            }
         }
     }
 
