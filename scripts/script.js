@@ -2383,6 +2383,11 @@ $(function () {
 
                     btnText.innerText = selectedEmployee.customerName
 
+                    btnBox.addEventListener("click", function() {
+                        selectedBuilding.occupant = selectedEmployee;
+                        conditioningBuildingUpdate();
+                    })
+
                     row.append(btnBox);
                     btnBox.append(btnText);
                     btnBox.append(btnImg)
