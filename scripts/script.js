@@ -680,7 +680,6 @@ $(function () {
             }
 
             if(gameState.buildingSceneFocus) {
-                console.log("I am under here")
                 buildingUpdateHandler();
             }
             if(expeditionArray.sector) {
@@ -689,7 +688,6 @@ $(function () {
         }
         if(gameState.tickState === true && gameState.currentTick === gameState.completeTick) {
             if(gameState.employeeFocus) {
-                console.log(gameState)
                 employeeDetailSetup(gameState.employeeFocus)
             }
             let chosenRes;
@@ -718,16 +716,13 @@ $(function () {
                     finishedResearch.innerText = chosenRes.name + "\n" + "Finished"
                     finishedResearch.setAttribute("class", "researchPanelComplete")
                     $("#" + chosenRes.id).off('click');
-                    console.log(chosenRes.researchItem)
                     let unlocked = $.grep(buildings, function (n, i) {
                         return n.id === chosenRes.researchItem;
                     });
-                    console.log(unlocked)
 
                     let unlockedGroup = $.grep(buildingTypes, function (n, i) {
                         return n.id === unlocked[0].type
                     })
-                    console.log(unlockedGroup)
                     unlocked[0].unlocked = true;
                     unlockedGroup[0].unlocked = true;
                     chosenRes.unlocked = true;
@@ -741,7 +736,6 @@ $(function () {
             }
         }
         else if (gameState.tickState === true && gameState.currentTick < gameState.completeTick) {
-            console.log("Howdy")
             gameState.currentTick = gameState.currentTick +  1;
             turnBar(gameState.currentTick, gameState.completeTick)
         }
@@ -760,7 +754,6 @@ $(function () {
         const turnBar = document.getElementById("turnTickerProgress");
         let tick = x;
         let turnTickerProgress = tick * 10;
-        console.log(turnTickerProgress)
         const completeTick = y * 10;
 
         if (turnTickerProgress <= completeTick) {
@@ -1167,7 +1160,6 @@ $(function () {
                         for(let i = 0; i < bodyOptionsArray.assSizeThick.length; i++) {
                             if(rand <= bodyOptionsArray.assSizeThick[i].roll) {
                                 custAssSize = bodyOptionsArray.assSizeThick[i];
-                                console.log(custAssSize.id + " " + bodyOptionsArray.assSizeThick[i].id)
                                 break;
                             }
                         }
@@ -1254,7 +1246,6 @@ $(function () {
                         for(let i = 0; i < bodyOptionsArray.assSizeThin.length; i++) {
                             if(rand <= bodyOptionsArray.assSizeThin[i].roll) {
                                 var custAssSize = bodyOptionsArray.assSizeThin[i];
-                                console.log(custAssSize.id + " " + bodyOptionsArray.assSizeThin[i].id)
                                 break;
                             }
                         }
@@ -1329,30 +1320,45 @@ $(function () {
         let statObject = {name: false, id: false, current: false, max: false, min: false, nameC: false}
 
         let resistance = Math.floor(Math.random() * 100)
-        let resistanceStat = Object.create(statObject)
-            resistanceStat.current = resistance;
-            resistanceStat.name = "resistance";
-            resistanceStat.nameC = "Resistance";
-            resistanceStat.id = "statResistance";
-            resistanceStat.max = 100;
-            resistanceStat.min = 0;
-        if (resistance < 40) {
-            resistance += 30;
-            resistanceStat.current = resistance;
+        let resistanceStat = {
+            current: resistance,
+            name: "resistance",
+            nameC: "Resistance",
+            id: "statResistance",
+            max: 100,
+            min: 0,
+        }
+        if (resistanceStat.current < 40) {
+            resistanceStat.current += 30;
 
         }
 
         let intelligence = Math.floor(Math.random() * 80)
-        if (intelligence < 20) {
-            intelligence += 15;
+        let inteliligenceStat = {
+            current: intelligence,
+            name: "intelligence",
+            nameC: "Intelligence",
+            id: "statIntelligence",
+            max: 100,
+            min: 0,
+        }
+        if (inteliligenceStat.current < 20) {
+            inteliligenceStat.current += 15;
         }
 
-        let willpower = Math.floor(Math.random() * 75)
-        if (willpower < 20) {
-            willpower += 15;
+        let willpower = Math.floor(Math.random() * 10)
+        let willpowerStat = {
+            current: willpower,
+            name: "willpower",
+            nameC: "Willpower",
+            id: "statWillpower",
+            max: 10,
+            min: 0,
         }
-        willpower = willpower / 10;
-        console.log(willpower)
+        if (willpowerStat.current < 2) {
+            willpowerStat.current += 2;
+        }
+        console.log("Willpower: " + willpowerStat.current)
 
         let id = gender + height + skin + resistanceStat.current + "ID"
 
@@ -1366,14 +1372,13 @@ $(function () {
 
         let body = {head: head, ass: ass, thigh: thigh, genitalia: genitalia, chest: chest, hips: hips}
 
-        const completeCustomer = { customerName: name, customerNamePlural: name + "'s", customerInternalName: internalName, customerGender: gender, customerGenderSpec: genderSpec, presentation: presentation, pronouns: pronouns, kinks: false, customerBodyType: custBodyType, customerHeight: height, customerBody: body, customerHair: hair, customerHairColor: hairColor, customerSkin: skin, custId: id, employee: false, request: false, assignedDoll: false, assignedCust: false, activeDoll: false, patience: 10, tick: 0, requestFulfillment: false, fulfilled: false, totalToPay: false, spawn: true, thiccScale: false, bodyPreference: bodyPreference, analVirgin: true, oralVirgin: true, occupation: false, resistance: resistanceStat, devotion: 0, intelligence: intelligence, willpower: willpower, arousal: false, def: 1.5};
+        const completeCustomer = { customerName: name, customerNamePlural: name + "'s", customerInternalName: internalName, customerGender: gender, customerGenderSpec: genderSpec, presentation: presentation, pronouns: pronouns, kinks: false, customerBodyType: custBodyType, customerHeight: height, customerBody: body, customerHair: hair, customerHairColor: hairColor, customerSkin: skin, custId: id, employee: false, request: false, assignedDoll: false, assignedCust: false, activeDoll: false, patience: 10, tick: 0, requestFulfillment: false, fulfilled: false, totalToPay: false, spawn: true, thiccScale: false, bodyPreference: bodyPreference, analVirgin: true, oralVirgin: true, occupation: false, resistance: resistanceStat, devotion: 0, intelligence: inteliligenceStat, willpower: willpowerStat, arousal: false, def: 1.5};
 
         kinkSetup(completeCustomer);
         completeCustomer.thiccScale = thiccScaleFunc(completeCustomer)
         requestSetup(completeCustomer);
 
         console.log(completeCustomer)
-        console.log("A customer enters the Spa. They are a " + height + " " + gender + " named " + name + " with a " + custBodyType.name + " build. " + "They have " + eyes.name + " eyes, " + hair + " hair, and " + skin + " skin.")
         return completeCustomer
 
     }
@@ -1389,7 +1394,6 @@ $(function () {
         }
     }
     currentCustomers = newCustomerArray;
-    console.log(currentCustomers)
     customerBuilder();
 
     function kinkSetup(x) {
@@ -1564,7 +1568,6 @@ $(function () {
     function sidePanelSetup(x, y, z, n) {
         let sidePanel = x;
         let employee = y;
-        console.log(employee.custId)
         let employeeKinks = employee.kinks.split("SLICE");
         let chosenCustomer = z;
         currentCustFocus = chosenCustomer;
@@ -1615,9 +1618,7 @@ $(function () {
                         else {
                             toolTipText = matchingKink + ": " + currentBonus;
                         }
-                        console.log(currentBonus)
 
-                        console.log(matchingKink + " is a match with " + chosenCustomerKinks[i])
                     }
                 }
             }
@@ -1631,20 +1632,17 @@ $(function () {
                 break;
             }
         }
-        console.log(currentPos)
         let lowerPos = currentPos - 1;
         let higherPos = currentPos + 1;
         if(chosenCustomer.bodyPreference === employee.thiccScale.id) {
             bonus += 2
             bodyBonus = "Preferred Body Type: 20% Bonus"
-            console.log("I am here")
         }
         else {
             if(thiccScale[lowerPos]) {
                 if(employee.thiccScale.id === thiccScale[lowerPos].id) {
                     bonus += 1;
                     bodyBonus = "Preferred Body Type: 10% Bonus"
-                    console.log("No I am here!")
                 }
             }
 
@@ -1652,7 +1650,6 @@ $(function () {
                 if(employee.thiccScale.id === thiccScale[higherPos].id) {
                     bonus += 1;
                     bodyBonus = "Close To Preferred Body Type: 10% Bonus"
-                    console.log("No I am actually here!")
                 }
             }
         }
@@ -1664,12 +1661,8 @@ $(function () {
         }
 
         let bonusPercent = (bonus / 10)
-        console.log(bonusPercent)
         let bonusTotal = (chosenCustomer.request.basePay * bonusPercent);
-        console.log(bonusTotal)
         let payTotal = bonusTotal + chosenCustomer.request.basePay;
-        console.log(payTotal)
-        console.log(bonus)
         if(!bonus) {
             btn.style.borderColor = "red";
         }
@@ -1691,7 +1684,6 @@ $(function () {
                 employee.assignedCust = chosenCustomer;
                 chosenCustomer.assignedDoll = employee;
                 eventFunction(chosenCustomer.request.eventId, chosenCustomer);
-                console.log("Employee: " + chosenCustomer.assignedDoll.customerName  + " Customer: " + employee.assignedCust.customerName);
                 chosenCustomer.requestFulfillment = true;
                 chosenCustomer.totalToPay = payTotal;
                 $("#" + chosenCustomer.custId + "RequestBtn").replaceWith("<p>Served By: <br>" + employee.customerName + "<p>");
@@ -1959,7 +1951,6 @@ $(function () {
         custName.innerText = selected.customerName
         custInternalName.innerText = selected.customerInternalName;
         let status = statusCheck(selected)
-        console.log(status)
         custStatus.innerText = status.name;
 
         if(selected.customerGenderSpec <= 100) {
@@ -2052,7 +2043,6 @@ $(function () {
                     for(let i = 0; i < plinkDesc.length; i++) {
                         if(kinkVal < plinkDesc[i].lvl) {
                             kinkLevel = plinkDesc[i]
-                            console.log(kinkLevel)
                             break;
                         }
                     }
@@ -2185,7 +2175,6 @@ $(function () {
             }
             if(count === slotCount) {
                 floorCount++;
-                console.log(floorCount)
                 if(floorCount < floors) {
                     let buildingRowBase = {floorUnlocked: false, id: false }
                     currentFloor = document.createElement("div");
@@ -2215,8 +2204,6 @@ $(function () {
                 })
             }
             else {
-                console.log("Something is already built here pop")
-
             }
         }
     }
@@ -2253,8 +2240,6 @@ $(function () {
         let buildBtn = document.getElementById("buildingBuildBtn")
 
         buildBtn.addEventListener("click", function() {
-            console.log(gameState.buildFocus)
-            console.log(gameState.buildItemFocus)
             let selectedSlot = gameState.buildFocus
             let selectedBuild = gameState.buildItemFocus;
 
@@ -2264,12 +2249,13 @@ $(function () {
             selectedSlot.name = selectedBuild.name;
             selectedSlot.type = selectedBuild.type;
             selectedSlot.stat = selectedBuild.statInt;
+            selectedSlot.statName = selectedBuild.stat;
+            selectedSlot.trainable = selectedBuild.trainable;
 
 
             $("#" + selectedSlot.id).text(selectedSlot.name)
             baseBoxUpdate();
 
-            console.log(buildingSlots)
 
         })
         for(let i = 0; i < btn.length; i++) {
@@ -2366,7 +2352,6 @@ $(function () {
                 $("#statBoxConditioningDesc").text(selectedBuilding.desc)
                 if(selectedBuilding.occupant) {
                     $("#statBoxConditioningNameDiv").text(selectedBuilding.occupant.customerName)
-                    console.log(selectedBuilding)
                     let currentProgress = progressCheck(selectedBuilding.occupant.resistance.current, selectedBuilding.occupant.resistance.max)
                     let progressBar = document.getElementById("statBoxConditioningDetailDiv").getElementsByClassName("progressBarProgress")
                     progressBar[0].style.width = currentProgress + "%";
@@ -2418,16 +2403,33 @@ $(function () {
     }
 
     function buildingUpdateHandler() {
+
+        for(let i = 0; i < buildingSlots.length; i++) {
+            if(buildingSlots[i].occupant !== false) {
+                if(buildingSlots[i].trainable === true) {
+                    if(buildingSlots[i].occupant[buildingSlots[i].statName].current <= 0) {
+                        buildingSlots[i].occupant = false;
+                    }
+                    else {
+                        buildingSlots[i].occupant[buildingSlots[i].statName].current += buildingSlots[i].stat
+                    }
+                }
+            }
+        }
+
         if(gameState.buildingSceneFocus) {
-
             if(gameState.buildingSceneFocus.type == "conditioning") {
-                console.log("mewody lowdy!")
-                 gameState.buildingSceneFocus.occupant.resistance.current = gameState.buildingSceneFocus.occupant.resistance.current + gameState.buildingSceneFocus.stat
-                 console.log(gameState)
 
-                 let currentProgress = progressCheck(gameState.buildingSceneFocus.occupant.resistance.current, gameState.buildingSceneFocus.occupant.resistance.max)
-                 let progressBar = document.getElementById("statBoxConditioningDetailDiv").getElementsByClassName("progressBarProgress")
+                let progressBar = document.getElementById("statBoxConditioningDetailDiv").getElementsByClassName("progressBarProgress")
+                if(gameState.buildingSceneFocus.occupant !== false) {
+                 let currentProgress = progressCheck(gameState.buildingSceneFocus.occupant[gameState.buildingSceneFocus.statName].current, gameState.buildingSceneFocus.occupant[gameState.buildingSceneFocus.statName].max)
                  progressBar[0].style.width = currentProgress + "%";
+                }
+                else {
+                    progressBar[0].style.visibility = "hidden"
+                    $("#statBoxConditioningNameDiv").text("Unoccupied")
+                }
+
             }
         }
     }
@@ -2440,12 +2442,10 @@ $(function () {
         $.each(selectedCustomer.customerBody, function(key, valueObject){
             $.each(selectedCustomer.customerBody[key], function(valueObject, val){
                 if(val.scale) {
-                    console.log(val.scale)
                     custScale += val.scale
                 }
             });
         });
-        console.log(custScale)
         for(let k = 0; k < thiccScale.length; k++) {
             if(custScale <= thiccScale[k].scale) {
                 return thiccScale[k]
@@ -2473,9 +2473,7 @@ $(function () {
         let currentVal = c;
 
         for(let i = 0; i < currentArray.length; i++) {
-            console.log(currentArray[i])
             if(currentInt < currentArray[i][c]) {
-                console.log(currentArray[i][c])
                 return currentArray[i]
             }
         }
@@ -2507,7 +2505,6 @@ $(function () {
         if(expeditionArray.sector) {
 
             let currentTitleImg = document.getElementById(expeditionArray.sector.id + "TitleImg")
-            console.log(currentTitleImg)
             currentTitleImg.src = expeditionArray.sector.imgNameActive;
 
         }
@@ -2581,7 +2578,6 @@ $(function () {
                         }
 
                         if(sectorArray[k].active === true) {
-                            console.log(sectorArray[k])
                             let oldSelection = document.getElementById(sectorArray[k].id + "TitleImg")
                             oldSelection.src = sectorArray[k].imgName;
                             sectorArray[k].active = false;
@@ -2803,7 +2799,6 @@ $(function () {
                     }
                 }
                 else if(activeBuildings[i].occupant && progressElement.length > 0) {
-                    console.log("I am updating: " + activeBuildings[i])
                     let newInt = activeBuildings[i].occupant[activeBuildings[i].statName]
                     let newTotal = 100;
 
@@ -2862,7 +2857,6 @@ $(function () {
         let currentResearch = $.grep(researchTree, function(n) {
             return n.active === true;
         })
-        console.log(currentResearch)
         if(currentResearch[0]) {
             let selectedResearch = currentResearch[0];
             let slot = document.getElementById("progressBoxInnerSlotResearch")
@@ -2918,7 +2912,6 @@ $(function () {
     function patientBoxCheck() {
         let target = document.getElementById("patientSidePanelInner");
         for(let i = 0; i < employees.length; i++) {
-            console.log("PatientBoxCheck: " + employees[i])
             let matchingEmployees = $.grep(patientBoxList, function(n) {
                 return n === employees[i]
             })
@@ -3008,7 +3001,6 @@ $(function () {
             eventType = z;
         }
         let selectedEvent;
-        console.log(cust)
 
         for(let i = 0; i < eventArray.length; i++) {
             if(eventArray[i].eventId === currentEvent && eventArray[i].activated === false) {
@@ -3299,11 +3291,8 @@ $(function () {
     function progressCheck(x, y) {
         let currentProgress = x;
         let totalProgress = y;
-        console.log(currentProgress);
-        console.log(totalProgress);
 
         let currentPercentage = currentProgress / totalProgress
-        console.log(currentPercentage)
         currentPercentage = currentPercentage * 100;
         return currentPercentage
     }
